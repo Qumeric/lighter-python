@@ -28,9 +28,9 @@ class Asset(BaseModel):
     """ # noqa: E501
     asset_id: StrictInt
     symbol: StrictStr
-    l1_decimals: Optional[StrictInt] = Field(default=None, description="Token decimals, present only when canonical_domain is 0 (legacy) or 1 (L1). Linking a wrapper never adds evm_decimals: the wrapper uses these decimals.")
+    l1_decimals: Optional[StrictInt] = Field(default=None, description="Token decimals, present only when canonical_domain is 1 (L1). Linking a wrapper never adds evm_decimals: the wrapper uses these decimals.")
     evm_decimals: Optional[StrictInt] = Field(default=None, description="Token decimals, present only when canonical_domain is 3 (EVM). Linking a wrapper never adds l1_decimals: the wrapper uses these decimals. Zero is a valid precision.")
-    canonical_domain: Optional[StrictInt] = Field(default=None, description="Asset origin: 0 legacy, 1 L1, 2 Core, 3 EVM. Selects which decimals field is present; Core-native assets have neither. Omitted by older API versions.")
+    canonical_domain: Optional[StrictInt] = Field(default=None, description="Asset origin: 0 not registered, 1 L1, 2 Core, 3 EVM. Selects which decimals field is present; Core-native and unregistered assets have neither. Omitted by older API versions.")
     evm_token: Optional[StrictStr] = Field(default=None, description="Linked EVM token or wrapper address. The zero address means unlinked; older API versions omit this field.")
     decimals: StrictInt
     min_transfer_amount: StrictStr
