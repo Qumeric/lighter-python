@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **asset_id** | **int** |  | 
 **symbol** | **str** |  | 
-**l1_decimals** | **int** | L1 token decimals when supplied by registration. Omitted for Core-native and EVM-native assets. | [optional] 
-**evm_decimals** | **int** | Canonical EVM token decimals for EVM-native assets. Zero is a valid precision; omission means unavailable. | [optional] 
-**canonical_domain** | **int** | Asset origin: 0 legacy, 1 L1, 2 Core, 3 EVM. Omitted by older API versions. | [optional] 
+**l1_decimals** | **int** | Token decimals, present only when canonical_domain is 0 (legacy) or 1 (L1). Linking a wrapper never adds evm_decimals: the wrapper uses these decimals. | [optional] 
+**evm_decimals** | **int** | Token decimals, present only when canonical_domain is 3 (EVM). Linking a wrapper never adds l1_decimals: the wrapper uses these decimals. Zero is a valid precision. | [optional] 
+**canonical_domain** | **int** | Asset origin: 0 legacy, 1 L1, 2 Core, 3 EVM. Selects which decimals field is present; Core-native assets have neither. Omitted by older API versions. | [optional] 
 **evm_token** | **str** | Linked EVM token or wrapper address. The zero address means unlinked; older API versions omit this field. | [optional] 
 **decimals** | **int** |  | 
 **min_transfer_amount** | **str** |  | 
