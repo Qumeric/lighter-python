@@ -5548,7 +5548,30 @@
           "l1_decimals": {
             "type": "integer",
             "format": "uint8",
-            "example": 18
+            "example": 18,
+            "description": "Token decimals, present only when canonical_domain is 1 (L1). Linking a wrapper never adds evm_decimals: the wrapper uses these decimals."
+          },
+          "evm_decimals": {
+            "type": "integer",
+            "format": "uint8",
+            "example": 18,
+            "description": "Token decimals, present only when canonical_domain is 3 (EVM). Linking a wrapper never adds l1_decimals: the wrapper uses these decimals. Zero is a valid precision."
+          },
+          "canonical_domain": {
+            "type": "integer",
+            "format": "uint8",
+            "enum": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "description": "Asset origin: 0 not registered, 1 L1, 2 Core, 3 EVM. Selects which decimals field is present; Core-native and unregistered assets have neither. Omitted by older API versions."
+          },
+          "evm_token": {
+            "type": "string",
+            "example": "0x0000000000000000000000000000000000000000",
+            "description": "Linked EVM token or wrapper address. The zero address means unlinked; older API versions omit this field."
           },
           "decimals": {
             "type": "integer",
@@ -5621,7 +5644,6 @@
         "required": [
           "asset_id",
           "symbol",
-          "l1_decimals",
           "decimals",
           "min_transfer_amount",
           "min_withdrawal_amount",
